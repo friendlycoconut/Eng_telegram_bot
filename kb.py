@@ -18,8 +18,16 @@ text_and_data = (
 # here the raw string is used for the simplicity
 row_btns = (types.InlineKeyboardButton(text, callback_data=data) for text, data in text_and_data)
 
-keyboard_markup.add(*row_btns)
+keyboard_markup.row(*row_btns)
 keyboard_markup.add(
     # url buttons have no callback data
     types.InlineKeyboardButton('Статистика', url='https://github.com/aiogram/aiogram'),
 )
+
+
+keyboard_markup_2 = types.InlineKeyboardMarkup()
+text_and_data_2 = (
+    ('A2 level', 'a2'),
+)
+row_btns_2=(types.InlineKeyboardButton(text, callback_data=data) for text, data in text_and_data_2)
+keyboard_markup_2.add(*row_btns_2)

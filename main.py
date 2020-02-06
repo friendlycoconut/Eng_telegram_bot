@@ -29,15 +29,17 @@ async def inline_kb_answer_callback_handler(query: types.CallbackQuery):
     answer_data = query.data
     # always answer callback queries, even if you have nothing to say
     await query.answer(f'You answered with {answer_data!r}')
-
+    kbm = types.InlineKeyboardMarkup()
     if answer_data == 'test':
-        text = 'Great, me too!'
+        kbm = kb.keyboard_markup_2
     elif answer_data == 'words':
         text = 'Oh no...Why so?'
     else:
         text = f'Unexpected callback data {answer_data!r}!'
 
-    await bot.send_message(query.from_user.id, text)
+    await query.message.answer("Выберите уровень: \n", reply_markup=kbm)
+
+
 @dp.message_handler(commands=['help'])
 async def process_help_command(message: types.Message):
     await message.answer("Напиши мне , и я помогу выучить английский!")
