@@ -27,6 +27,23 @@ async def process_start_command(message: types.Message):
 @dp.callback_query_handler(text='words')  # if cb.data == 'yes'
 async def inline_kb_answer_callback_handler(query: types.CallbackQuery):
     answer_data = query.data
+
+    # always answer callback queries, even if you have nothing to say
+    await query.answer(f'You answered with {answer_data!r}')
+    kbm = types.InlineKeyboardMarkup()
+    if answer_data == 'test':
+        kbm = kb.keyboard_markup_2
+    elif answer_data == 'words':
+        kbm = kb.keyboard_markup_words
+    else:
+        text = f'Unexpected callback data {answer_data!r}!'
+
+    await query.message.answer("Выберите уровень: \n" , reply_markup=kbm)
+
+@dp.callback_query_handler(text='a2')  # if cb.data == 'no'
+@dp.callback_query_handler(text='b1')  # if cb.data == 'yes'
+async def inline_kb_answer_callback_handler(query: types.CallbackQuery):
+    answer_data = query.data
     # always answer callback queries, even if you have nothing to say
     await query.answer(f'You answered with {answer_data!r}')
     kbm = types.InlineKeyboardMarkup()
@@ -37,7 +54,8 @@ async def inline_kb_answer_callback_handler(query: types.CallbackQuery):
     else:
         text = f'Unexpected callback data {answer_data!r}!'
 
-    await query.message.answer("Выберите уровень: \n", reply_markup=kbm)
+    await bot.send_poll(query.from_user.id,'what?', ['yes','no','prob'], True, type ='quiz', correct_option_id=0)
+
 
 
 @dp.message_handler(commands=['help'])

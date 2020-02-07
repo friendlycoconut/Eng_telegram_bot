@@ -6,7 +6,7 @@ button_hi = KeyboardButton('Привет! 👋')
 greet_kb = ReplyKeyboardMarkup()
 greet_kb.add(button_hi)
 
-keyboard_markup = types.InlineKeyboardMarkup(row_width=3)
+keyboard_markup = types.InlineKeyboardMarkup(row_width=3, one_time_keyboard=True)
 # default row_width is 3, so here we can omit it actually
 # kept for clearness
 
@@ -25,9 +25,16 @@ keyboard_markup.add(
 )
 
 
-keyboard_markup_2 = types.InlineKeyboardMarkup()
+keyboard_markup_2 = types.InlineKeyboardMarkup(one_time_keyboard=True)
 text_and_data_2 = (
     ('A2 level', 'a2'),
 )
 row_btns_2=(types.InlineKeyboardButton(text, callback_data=data) for text, data in text_and_data_2)
 keyboard_markup_2.add(*row_btns_2)
+
+keyboard_markup_words = types.InlineKeyboardMarkup(one_time_keyboard=True)
+text_and_data_words = (
+    ('A2 words', 'a2_w'),
+)
+row_btns_words=(types.InlineKeyboardButton(text, callback_data=data) for text, data in text_and_data_words)
+keyboard_markup_words.add(*row_btns_words)
