@@ -8,7 +8,7 @@ import audios
 import kb
 import polls
 
-API_TOKEN = '844758961:AAGaQ-s_dnXmADegZAsA28Utfr9nnS1xjtU'
+API_TOKEN = ''
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
