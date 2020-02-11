@@ -2,11 +2,13 @@ import logging
 
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types import ReplyKeyboardRemove, ReplyKeyboardMarkup, KeyboardButton, \
-    InlineKeyboardMarkup, InlineKeyboardButton
+    InlineKeyboardMarkup, InlineKeyboardButton, Poll
 
+import audios
 import kb
+import polls
 
-API_TOKEN = ''
+API_TOKEN = '844758961:AAGaQ-s_dnXmADegZAsA28Utfr9nnS1xjtU'
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -23,40 +25,51 @@ async def process_start_command(message: types.Message):
     print(message.from_user.first_name)
     await message.answer("Привет, " + message.from_user.first_name + "! " + u'\U0001f604'+ " \nВыберите один из вариантов: ", reply_markup=kb.keyboard_markup)
 
-@dp.callback_query_handler(text='test')  # if cb.data == 'no'
-@dp.callback_query_handler(text='words')  # if cb.data == 'yes'
+@dp.callback_query_handler(text=kb.variant_1_text_slug)  # if cb.data == 'no'
+@dp.callback_query_handler(text=kb.variant_2_text_slug)  # if cb.data == 'yes'
 async def inline_kb_answer_callback_handler(query: types.CallbackQuery):
     answer_data = query.data
 
     # always answer callback queries, even if you have nothing to say
     await query.answer(f'You answered with {answer_data!r}')
     kbm = types.InlineKeyboardMarkup()
-    if answer_data == 'test':
+    if answer_data == kb.variant_1_text_slug:
         kbm = kb.keyboard_markup_2
-    elif answer_data == 'words':
+    elif answer_data == kb.variant_2_text_slug:
         kbm = kb.keyboard_markup_words
     else:
         text = f'Unexpected callback data {answer_data!r}!'
 
     await query.message.answer("Выберите уровень: \n" , reply_markup=kbm)
 
-@dp.callback_query_handler(text='a2')  # if cb.data == 'no'
-@dp.callback_query_handler(text='b1')  # if cb.data == 'yes'
+@dp.callback_query_handler(text='a2')
+@dp.callback_query_handler(text='b1')
 async def inline_kb_answer_callback_handler(query: types.CallbackQuery):
-    answer_data = query.data
-    # always answer callback queries, even if you have nothing to say
-    await query.answer(f'You answered with {answer_data!r}')
-    kbm = types.InlineKeyboardMarkup()
-    if answer_data == 'test':
-        kbm = kb.keyboard_markup_2
-    elif answer_data == 'words':
-        text = 'Oh no...Why so?'
-    else:
-        text = f'Unexpected callback data {answer_data!r}!'
-
-    await bot.send_poll(query.from_user.id,'what?', ['yes','no','prob'], True, type ='quiz', correct_option_id=0)
+    for test in polls.pollColection:
+        await bot.send_poll(query.from_user.id,question=test.question, options=test.options,
+                        is_anonymous= test.is_anonymous, type =test.type,
+                        correct_option_id= test.correct_option_id, allows_multiple_answers = test.allows_multiple_answers)
 
 
+@dp.callback_query_handler(text='a2_w')
+@dp.callback_query_handler(text='b1_w')
+async def inline_kb_answer_callback_handler(query: types.CallbackQuery):
+    for word in audios.Words:
+        if word in audios.Words:
+            await bot.send_message(query.from_user.id, word)
+            await bot.send_audio(query.from_user.id, audio=open(audios.Audios[word], 'rb'))
+
+
+@dp.poll_answer_handler()
+async def some_poll_answer_handler(poll: types.PollAnswer):
+
+
+    print(( poll.poll_id))
+
+#@dp.callback_query_handler(func=lambda call: True)
+#async def longname(call):
+#    if call.data == "a2_w":
+#        await bot.send_message(call.message.chat.id, 'тепло там')
 
 @dp.message_handler(commands=['help'])
 async def process_help_command(message: types.Message):
