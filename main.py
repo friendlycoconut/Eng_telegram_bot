@@ -4,7 +4,6 @@ from aiogram import Bot, Dispatcher, executor, types
 
 import audios
 import kb
-import polls
 
 API_TOKEN = os.getenv("API_TOKEN")
 
