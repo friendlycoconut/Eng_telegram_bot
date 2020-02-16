@@ -1,5 +1,3 @@
-
-
 Audios = dict()
 
 Audios['Advantage - преимущество'] = 'audios/advantage-us.mp3'
@@ -18,9 +16,18 @@ Audios['Spreadsheet - таблица'] = 'audios/spreadsheet-us.mp3'
 Audios['To require - нуждаться'] = 'audios/require-us.mp3'
 Audios['To upload - загружать'] = 'audios/upload-us.mp3'
 
-Words = ['Advantage - преимущество', 'Appliance - прибор', 'Attachment - прикрепление',
-         'Benefit - [ˈbenɪfɪt] - польза', 'Boardroom - зал заседаний',
-         'Connectivity - связь','Customer - клиент','Device - устройство',
-         'Efficiency - эффективность','Engine - двигатель','Opportunity - возможность',
-         'Sophisticated - утонченный','Spreadsheet - таблица',
-         'To require - нуждаться','To upload - загружать']
+Words = ['Advantage - преимущество',
+         'Appliance - прибор',
+         'Attachment - прикрепление',
+         'Benefit - [ˈbenɪfɪt] - польза',
+         'Boardroom - зал заседаний',
+         'Connectivity - связь',
+         'Customer - клиент',
+         'Device - устройство',
+         'Efficiency - эффективность',
+         'Engine - двигатель',
+         'Opportunity - возможность',
+         'Sophisticated - утонченный',
+         'Spreadsheet - таблица',
+         'To require - нуждаться',
+         'To upload - загружать']
