@@ -16,18 +16,4 @@ Audios = {
     'To upload - загружать': 'audios/upload-us.mp3'
 }
 
-Words = ['Advantage - преимущество',
-         'Appliance - прибор',
-         'Attachment - прикрепление',
-         'Benefit - [ˈbenɪfɪt] - польза',
-         'Boardroom - зал заседаний',
-         'Connectivity - связь',
-         'Customer - клиент',
-         'Device - устройство',
-         'Efficiency - эффективность',
-         'Engine - двигатель',
-         'Opportunity - возможность',
-         'Sophisticated - утонченный',
-         'Spreadsheet - таблица',
-         'To require - нуждаться',
-         'To upload - загружать']
+Words = [word for word in Audios.keys()]
