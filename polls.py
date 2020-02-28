@@ -23,6 +23,9 @@ poll6 = Poll(id =6, question ="Tomorrow’s a holiday, so we ........ go to work
              options = ['have to', 'mustn’t', 'don’t have to' ] ,
             type = 'quiz', allows_multiple_answers = False, correct_option_id = 2 )
 
+
+dict = ["Tomorrow’s a holiday, so we ........ go to work. " , {"idjidki": True}]
+
 pollColection = []
 
 pollColection.append(poll1)
