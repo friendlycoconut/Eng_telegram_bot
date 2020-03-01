@@ -6,12 +6,12 @@ import audios
 import kb
 import polls
 
-API_TOKEN = os.getenv("API_TOKEN")
+API_TOKEN = os.getenv("")
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 # Initialize bot and dispatcher
-bot = Bot(token=API_TOKEN)
+bot = Bot(token="")
 dp = Dispatcher(bot)
 
 
@@ -52,12 +52,20 @@ async def inline_kb_answer_callback_handler(query: types.CallbackQuery):
 
 
 @dp.callback_query_handler(text='a2_w')
-@dp.callback_query_handler(text='b1_w')
 async def inline_kb_answer_callback_handler(query: types.CallbackQuery):
-    for word in audios.Words:
-        if word in audios.Words:
+    for word in audios.Words1:
+        if word in audios.Words1:
             await bot.send_message(query.from_user.id, word)
             await bot.send_audio(query.from_user.id, audio=open(audios.Audios[word], 'rb'))
+
+@dp.callback_query_handler(text='b1_w')
+async def inline_kb_answer_callback_handler(query: types.CallbackQuery):
+    kbm = kb.keyboard_markup_words
+    for word1 in audios.Words2:
+        if word1 in audios.Words2:
+            await bot.send_message(query.from_user.id, word1)
+            await bot.send_audio(query.from_user.id, audio=open(audios.Audios2[word1], 'rb'))
+
 
 
 @dp.message_handler(commands=['help'])

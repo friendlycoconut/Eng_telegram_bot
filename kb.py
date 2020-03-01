@@ -7,9 +7,12 @@ keyboard_markup = types.InlineKeyboardMarkup(row_width=3, one_time_keyboard=True
 variant_1_text = 'Я хочу пройти тест'
 variant_2_text = 'Я хочу выучить слова'
 
+variant_1_text_slug = slugify(variant_1_text)
+variant_2_text_slug = slugify(variant_2_text)
+
 text_and_data = [
     [variant_1_text, slugify(variant_1_text)],
-    [variant_2_text, slugify(variant_1_text)],
+    [variant_2_text, slugify(variant_2_text)],
 ]
 
 row_btns = (types.InlineKeyboardButton(text, callback_data=data) for text, data in text_and_data)
@@ -30,6 +33,17 @@ keyboard_markup_2.add(*row_btns_2)
 keyboard_markup_words = types.InlineKeyboardMarkup(one_time_keyboard=True)
 text_and_data_words = (
     ('A2 words', 'a2_w'),
+    ('B1 words', 'b1_w'),
+
 )
 row_btns_words=(types.InlineKeyboardButton(text, callback_data=data) for text, data in text_and_data_words)
 keyboard_markup_words.add(*row_btns_words)
+
+
+
+keyboard_markup_next = types.InlineKeyboardMarkup(one_time_keyboard=True)
+text_and_data_next = (
+    ('yes', 'yes'),
+)
+row_btns_next = (types.InlineKeyboardButton(text, callback_data=data) for text, data in text_and_data_next)
+keyboard_markup_next.add(*row_btns_next)
